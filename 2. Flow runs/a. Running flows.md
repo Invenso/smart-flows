@@ -11,27 +11,27 @@ Depending on the license, these types are restricted. They can be set using the 
 
 ### POST /api/v1/flows/executions
 
-##### Without body
-"flowId": as a query parameter, this should be a flow which does not contain primary entity.
+#### Without body
+flowId [query parameter] - As a query parameter, this should be a flow which does not contain primary entity.
 
-Body: Empty, contents will be ignored.
-
-
-##### With XML as body
-"flowId": as a query parameter, this should be a flow which is based on a template with a schema dataset.
-
-Body: Should contain the XML according to the dataset for the primary template
+[body] - Empty, contents will be ignored.
 
 
-##### Called from a plug-in (Dynamics or Sugar)
-*Should not be called using the API*
+#### With XML as body
+flowId [query parameter] - As a query parameter, this should be a flow which is based on a template with a schema dataset.
 
-"flowId": as a query parameter, this should be a flow which does not contain
- primary entity. This can be forced on any flow by changing the input type of the flow in the flow builder.
+[Body] Should contain the XML according to the dataset for the primary template
 
-"datasetId": as a query parameter, this id is unique for every plugin.
 
-Body: Should contains json according to the following structure
+#### Called from a plug-in (Dynamics or Sugar)
+<i>Should not be called using the API</i>
+
+flowId [query parameter] - This should be a flow which does not contain
+primary entity. This can be forced on any flow by changing the input type of the flow in the flow builder.
+
+datasetId [query parameter] - as a query parameter, this id is unique for every plugin.
+
+Post body:
 
 ```
 {
@@ -41,13 +41,13 @@ Body: Should contains json according to the following structure
 "organizationUniqueName": "organizationName"
 }
 ```
-"id": The ids of the records, this is an array so multiple values are allowed
+id [body] - The ids of the records, this is an array so multiple values are allowed
 
-"entity": The type of the records
+entity [body] - The type of the records
 
-"userId": The id of the user in the plug-in, user should be synced.
+userId [body] - The id of the user in the plug-in, user should be synced.
 
-"organizationUniqueName": optional
+organizationUniqueName [body] - optional
 
 
 The first response will always be something like:
