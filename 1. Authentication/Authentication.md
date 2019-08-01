@@ -16,7 +16,7 @@ Use the Project console to generate an API key:
 This key can be used for every following API request by adding it as a custom header: "X-API-Key: your-api-key".
 You should revoke this key (remove it from your user) if you think it is compromised. Thereafter the API key 
 will be invalid.
-
+---
 ### JWT tokens
 Why should you should use JWT tokens in your application? API keys are so easy to use.
 
@@ -26,11 +26,13 @@ has parameters which reference the user who has created or modified the item. It
 
 #### How to use?
 ##### GET /api/v1/authenticate
-
-"login.enabled": Whether username/password login is supported.
-"methods": show the list of methods which are allowed to log in.
-"oauth2": if there are Oauth methods supported, this contains more info about them.
-"resetPasswordSupported": Whether reset password is supported
+<table>
+<tr><th>Response body</th><th>Description</th></tr>
+<tr><td>login.enabled</td><td> Whether username/password login is supported.</td></tr>
+<tr><td>methods</td><td> show the list of methods which are allowed to log in.</td></tr>
+<tr><td>oauth2</td><td> if there are Oauth methods supported, this contains more info about them.</td></tr>
+<tr><td>resetPasswordSupported</td><td> Whether reset password is supported</td></tr>
+</table>
 
 ##### POST /api/v1/authenticate
 
@@ -44,3 +46,28 @@ First, create an url based on the oauth2 method returned by GET /api/v1/authenti
 formed by oauth2.url with oauth2.parameters as query parameters. Go to it and log in with the Oauth provider. 
 The return url query parameter should be your own, which can handle the response query parameters. Send the 
 responseParams to this endpoint to receive a JWT token.
+
+
+---
+### Extras in the authentication API
+This contains the functionality to reset the password. SMTP configuration should be done server side so mails can be send.
+
+
+##### POST /api/v1/authorizeReset
+Ask to reset the password for a certain user.
+##### POST /api/v1/authorizeReset
+<table>
+<tr><th>Request body</th><th>Description</th></tr>
+<tr><td>username</td><td> The name for the user for which you want to reset the password.</td>
+<tr><td>path</td><td> Will send an email to the emailaddress of the the user with a link to the Project Console or the Flow 
+Execution Panel. This only supports the relative links "/project" & "/client".</td>
+</table>
+
+##### POST /api/v1/reset
+Do the actual reset password for the user.
+<table>
+<tr><th>Request body</th><th>Description</th></tr>
+<tr><td>password</td><td>The new password for the user</td>
+<tr><td>resetToken</td><td>The token is appended to the url in the email</td>
+<tr><td>userId</td><td>The id is appended to the url in the email</td>
+</table>

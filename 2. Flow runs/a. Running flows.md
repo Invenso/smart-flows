@@ -12,24 +12,29 @@ Depending on the license, these types are restricted. They can be set using the 
 ### POST /api/v1/flows/executions
 
 #### Without body
-flowId [query parameter] - As a query parameter, this should be a flow which does not contain primary entity.
-
-[body] - Empty, contents will be ignored.
+<table>
+<tr><th>Query parameter</th><th>Description</th></tr>
+<tr><td>flowId</td><td>This should be a flow which does not contain primary entity.</td></tr>
+</table>
 
 
 #### With XML as body
-flowId [query parameter] - As a query parameter, this should be a flow which is based on a template with a schema dataset.
+<table>
+<tr><th>Query parameter</th><th>Description</th></tr>
+<tr><td>flowId</td><td>This should be a flow which is based on a template with a schema dataset.</td></tr>
+</table>
 
-[Body] Should contain the XML according to the dataset for the primary template
+The POST-body should contain the XML according to the dataset for the primary template
 
 
 #### Called from a plug-in (Dynamics or Sugar)
 <i>Should not be called using the API</i>
 
-flowId [query parameter] - This should be a flow which does not contain
-primary entity. This can be forced on any flow by changing the input type of the flow in the flow builder.
-
-datasetId [query parameter] - as a query parameter, this id is unique for every plugin.
+<table>
+<tr><th>Query parameter</th><th>Description</th></tr>
+<tr><td>flowId</td><td>This should be a flow which does not contain primary entity. This can be forced on any flow by changing the input type of the flow in the flow builder.</td></tr>
+<tr><td>datasetId</td><td>This id is unique for every plugin</td></tr>
+</table>
 
 Post body:
 
@@ -41,14 +46,14 @@ Post body:
 "organizationUniqueName": "organizationName"
 }
 ```
-id [body] - The ids of the records, this is an array so multiple values are allowed
 
-entity [body] - The type of the records
-
-userId [body] - The id of the user in the plug-in, user should be synced.
-
-organizationUniqueName [body] - optional
-
+<table>
+<tr><th>POST body</th><th>Description</th></tr>
+<tr><td>id</td><td>The ids of the records, this is an array so multiple values are allowed</td></tr>
+<tr><td>entity</td><td> show the list of methods which are allowed to log in.</td></tr>
+<tr><td>userId</td><td>The id of the user in the plug-in, user should be synced.</td></tr>
+<tr><td>organizationUniqueName</td><td>optional</td></tr>
+</table>
 
 The first response will always be something like:
 ```

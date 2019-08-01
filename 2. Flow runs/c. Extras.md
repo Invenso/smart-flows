@@ -42,7 +42,7 @@ This request for example will return all flow executions before or ran on 2019-0
 For more info [see filtering](/3.%20Smart%20Flows%20Entities/2.%20Filtering.md).
 
 ##### POST /api/v1/flows/executions/statistics
-This needs a similar body like the previous endpoint and return the data required to draw charts.
+This needs a similar body like the previous endpoint and returns the data required to draw charts.
 
 
 Continue with [paging](/3.%20Smart%20Flows%20Entities/1.%20CRUD.md).

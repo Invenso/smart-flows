@@ -49,24 +49,36 @@ Esign connector.
 
 ### Cancel flow
 ##### DELETE /api/v1/flows/executions/{id}
-id [query] - The id returned by the initial progress
+<table>
+<tr><th>Query parameter</th><th>Description</th></tr>
+<tr><td>id</td><td>The id returned by the initial progress</td></tr>
+</table>
 
 ### Send user input
 ##### POST /api/v1/flows/executions/{id}/progress
-id [query] - The id returned by the initial progress
+<table>
+<tr><th>Query parameter</th><th>Description</th></tr>
+<tr><td>id</td><td>The id returned by the initial progress</td></tr>
+</table>
 
 If the flow is stuck in userinput, it needs form data before it can be continued. It is recommended to use the 
 Flow execution panel for this.
 
 ### Get execution details
 ##### GET /api/v1/flows/executions/{executionId}
-id [query] - The id returned by the initial progress
+<table>
+<tr><th>Query parameter</th><th>Description</th></tr>
+<tr><td>id</td><td>The id returned by the initial progress</td></tr>
+</table>
 
 Especially used for debugging flows.
 
 ### Get flow output
 ##### GET /api/v1/flows/executions/{id}/progress
-id [query] - The id returned by the initial progress
+<table>
+<tr><th>Query parameter</th><th>Description</th></tr>
+<tr><td>id</td><td>The id returned by the initial progress</td></tr>
+</table>
 
 When the flow has ended, there are possibly documents you want to retrieve. The id of the document can be found in the "model" property of the response.
 Depending on block of origin, it will be nested in the json-response. The name of the property will not always be "document" but its type will.
