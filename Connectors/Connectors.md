@@ -1,6 +1,6 @@
 #Connector
 
-For default create, read, update & delete operations see [CRUD](/3.%20Smart%20Flows%20Entities/1.%20CRUD.md)
+For default create, read, update & delete operations see [CRUD](/3.%20Smart%20Flows%20Entities/1.%20CRUD.md).
 
 ### Connector setup
 Before calling the setup on a connector, it has to be created. Use it's id to start the setup process.
@@ -48,7 +48,8 @@ Returns one licensed connector types by id
 ###Other
 
 #### GET /api/v1/connectors/{connectorId}/test
-Test a connector by id. This tells you whether this connector is still valid and can be used in data sets/templates/flows.
+Test a connector by id. This tells you whether this connector is still valid and can be used in data 
+sets/templates/flows.
 
 #### POST /api/v1/connectors/{connectorId}/refresh
 Clear the connector cache. The body is ignored.

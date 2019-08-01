@@ -1,6 +1,6 @@
 # Assets
 
-For default create, read, update & delete operations see [CRUD](/3.%20Smart%20Flows%20Entities/1.%20CRUD.md)
+For default create, read, update & delete operations see [CRUD](/3.%20Smart%20Flows%20Entities/1.%20CRUD.md).
 
 #### GET /api/v1/assets/{assetId}/content
 Return the content of the asset.
