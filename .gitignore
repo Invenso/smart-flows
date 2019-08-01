@@ -1,3 +1,5 @@
 #IntelliJ
-.idea
+.idea/*
+.idea/inspectionProfiles/*
 *.iml
+*.xml
