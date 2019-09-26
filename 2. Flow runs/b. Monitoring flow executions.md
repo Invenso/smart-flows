@@ -64,6 +64,40 @@ Esign connector.
 If the flow is stuck in userinput, it needs form data before it can be continued. It is recommended to use the 
 Flow execution panel for this.
 
+To continue a flow, checkout the schema-property in the progress. This contains properties. These properties can be used to construct the response.
+```
+{
+   
+    "schema": {
+        "properties": {
+            "ea75ddfd-38f7-4b97-bcc9-3f1756c5d6ff_1cd79690-ade5-41d5-873e-739297926ee9": {
+                "type": "string"
+            },
+        ...
+
+```
+In the form property of the progress, you can find how it should be displayed.
+```
+"form": [
+        {
+            "htmlClass": "bl-1 bt-1 px-3 pt-2 border-gray-3",
+            "items": [
+                {
+                    "description": "",
+                    "key": "ea75ddfd-38f7-4b97-bcc9-3f1756c5d6ff_f706405c-ba8f-46e9-b863-b4cd08aa6ef6",
+                    "title": "1",
+                    "type": "Enter some text here"
+                },
+        ...
+```
+The model property gives default values for this field.
+The response body can be constructed with the "key" of the field with it's value, in JSON format:
+{
+    "ea75ddfd-38f7-4b97-bcc9-3f1756c5d6ff_f706405c-ba8f-46e9-b863-b4cd08aa6ef6": "Some value entered by the user",
+    "...": "...",
+    ...
+}
+
 ### Get execution details
 ##### GET /api/v1/flows/executions/{executionId}
 <table>
