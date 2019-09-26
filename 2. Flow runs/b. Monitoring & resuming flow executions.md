@@ -100,6 +100,8 @@ The response body can be constructed with the "key" of the field with it's value
 }
 ```
 
+Make sure all properties in the progress get their value, those who are not entered will be left empty. Once the progress is send, the flow will be resumed.
+
 ### Get execution details
 ##### GET /api/v1/flows/executions/{executionId}
 <table>
