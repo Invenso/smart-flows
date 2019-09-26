@@ -92,11 +92,13 @@ In the form property of the progress, you can find how it should be displayed.
 ```
 The model property gives default values for this field.
 The response body can be constructed with the "key" of the field with it's value, in JSON format:
+```
 {
     "ea75ddfd-38f7-4b97-bcc9-3f1756c5d6ff_f706405c-ba8f-46e9-b863-b4cd08aa6ef6": "Some value entered by the user",
     "...": "...",
     ...
 }
+```
 
 ### Get execution details
 ##### GET /api/v1/flows/executions/{executionId}
