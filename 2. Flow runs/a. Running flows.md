@@ -70,4 +70,4 @@ The first response will always be something like:
 Variant on the previous call. This one skips all user input and can be used on all types of flow input.
 For custom data sets, it will use the default value. The same goes for Smart Forms and user editable fields.
 
-Next [Monitoring flows](b.%20Monitoring%20flow%20executions.md).
+Next [Monitoring flows](b.%20Monitoring%20%26%20resuming%20flow%20executions.md).
