@@ -2,12 +2,19 @@
 
 Flow steps are essential to all flows. They tell how flow blocks should look and what data it needs. The structure will be explained by analyzing the "Generate document"-step.
 
-Like most entities, the step definition has a displayName, id & description. 
-iconClass is used to display the icon in the flowbuilder. 
-The group and type are labels to categorize the step definitions.
-externalOutputParameters can be set as outputParameters in a flow block.
-The primaryParameters is no longer used.
+#### General
+Like most entities, the step definition has a displayName, id & description.
 
+iconClass is used to display the icon in the flowbuilder. 
+
+group and type are labels to categorize the step definitions.
+
+externalOutputParameters can be set as outputParameters in a flow block.
+
+primaryParameters is no longer used.
+
+
+#### Input
 InputForm & inputSchema are used to fill the parameters property of a flow block.
 
 The inputSchema defines how the data should be structured (defines the type of the property).
@@ -42,11 +49,11 @@ The inputForm defines how the properties are rendered by the flow builder. It co
         ],
         "group": "Document",
         "iconClass": "document",
-        "id": "e8848859-f919-3fa0-b23f-82a04d51447a",,
+        "id": "e8848859-f919-3fa0-b23f-82a04d51447a",
         "primaryParameters": [
             "template"
         ],
-        "type": "gendoc"
+        "type": "gendoc",
         "inputForm": [
             {
                 "htmlClass": "m-x",
