@@ -1,4 +1,4 @@
-# Flow steps - in depth structure
+# Flow steps - structure
 
 Flow steps are essential to all flows. They tell how flow blocks should look and what data it needs. The structure will be explained by analyzing the "Generate document"-step.
 
