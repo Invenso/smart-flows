@@ -47,7 +47,7 @@ The primary template can have multiple data sets linked to it. In order to know 
 #### Body
 postProcessingSteps - Upon creation, this parameter can be filled by adding postProcessing flow step definitions to it. The id and displayName are enough. Once created, this parameter is ignored.
 
-Note: A flow zone is a logical way of splitting the flow in parts. One zone can contain multiple flow steps. Athough, in standard flows, this is restricted to one.
+Note: A flow zone is a logical way of splitting the flow in parts. One zone can contain multiple flow blocks. Although, in standard flows, this is restricted to one.
 
 preZones - This list of zones can be used to collect data or create conditions. In advanced flows, there is no limit to the type of steps you can add to these zones. 
 genDocZone - This zone contains the primary "Generate document"-step, by default, its required parameters are filled (data is linked). Only in simple flows other steps can be added to this.
@@ -64,14 +64,15 @@ block:
     try, switch, condition: The are the control blocks and can have lists of zones of their own
     outputParameters: These are the parameters you want to retrieve when your execution has ended. They can be found in the step  definition
    
-##### parameters further explained following the example
+##### Parameters further explained following the example
 The "Generate document"-step has the following parameters: data, dateFormat, documentName, format, language, template and timeFormat.
 Let's take a look at the documentName parameter:
 
+The fields required and userEditable are to be combined, required has no meaning if it is not userEditable. This is used for validating the user input. When userEditable is set to true, the user wil be asked to fill the field when the flow is ran.
 
+The next property is either value or variableValue. When variableValue, links can be set to other block outputs. This is an array, so multiple links can be combined. Also plain text is allow. If a steps outputs data, a dataPath property can be added, pointing towards a field in the data set corresponding to the data.
 
-
-#### Example
+#### Example flow
 The following flow contains a "Generate document"-step and a "Store in Sharepoint"-step.
 
 ```json
