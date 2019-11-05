@@ -1,0 +1,206 @@
+# Flow steps - in depth structure
+
+Flow steps are essential to all flows. They tell how flow blocks should look and what they do. The structure will be explained by analyzing the "Generate document"-step.
+
+
+#### Flow step defintion of the "Generate document"-step
+
+```json
+
+{
+        "description": "Generate a document.",
+        "displayName": "Generate document",
+        "externalOutputParameters": [
+            "document",
+            "documentName",
+            "messages",
+            "language"
+        ],
+        "group": "Document",
+        "iconClass": "document",
+        "id": "e8848859-f919-3fa0-b23f-82a04d51447a",
+        "inputForm": [
+            {
+                "htmlClass": "m-x",
+                "items": [
+                    {
+                        "allowUserEdit": false,
+                        "async": true,
+                        "asyncFilter": true,
+                        "complexOnly": false,
+                        "displayProperty": "displayName",
+                        "idProperty": "id",
+                        "key": "template",
+                        "placeholder": "None",
+                        "readonly": "$context.primaryGenDoc",
+                        "type": "select"
+                    },
+                    {
+                        "dependencies": [
+                            "template"
+                        ],
+                        "items": [
+                            {
+                                "allowUserEdit": false,
+                                "async": true,
+                                "asyncFilter": true,
+                                "displayProperty": "displayName",
+                                "key": "data[]",
+                                "placeholder": "No data",
+                                "type": "select"
+                            }
+                        ],
+                        "key": "data",
+                        "title": "Template data",
+                        "type": "data-array"
+                    },
+                    {
+                        "allowUserEdit": true,
+                        "async": true,
+                        "asyncFilter": true,
+                        "complexOnly": false,
+                        "displayProperty": "displayName",
+                        "idProperty": "id",
+                        "key": "language",
+                        "placeholder": "Default (English)",
+                        "type": "select"
+                    }
+                ],
+                "title": "Basic Settings",
+                "titleClass": "h5 bt-1 border-blue-4 text-blue-4 w-100 mt-3",
+                "type": "section"
+            },
+            {
+                "htmlClass": "m-x",
+                "items": [
+                    {
+                        "complexOnly": false,
+                        "key": "documentName",
+                        "placeholder": "Not specified",
+                        "singleValue": false,
+                        "type": "text"
+                    },
+                    {
+                        "bodyClass": "d-flex justify-content-between",
+                        "childClass": "w-45",
+                        "items": [
+                            {
+                                "key": "dateFormat",
+                                "placeholder": "Not specified",
+                                "titleMap": [
+                                    {
+                                        "name": "dd-MM-yyyy",
+                                        "value": "dd-MM-yyyy"
+                                    },
+                                    ...
+                                ],
+                                "type": "select"
+                            },
+                            {
+                                "key": "timeFormat",
+                                "placeholder": "Not specified",
+                                "titleMap": [
+                                    {
+                                        "name": "HH:mm",
+                                        "value": "HH:mm"
+                                    },
+                                    ...
+                                ],
+                                "type": "select"
+                            }
+                        ],
+                        "type": "section"
+                    },
+                    {
+                        "key": "format",
+                        "placeholder": "Default value (Word document (*.docx))",
+                        "titleMap": [
+                            {
+                                "name": "Word document (*.docx)",
+                                "value": "Docx"
+                            },
+                           ...
+                        ],
+                        "type": "select"
+                    }
+                ],
+                "title": "Name & format settings",
+                "titleClass": "h5 bt-1 border-blue-4 text-blue-4 w-100 mt-3",
+                "type": "section"
+            }
+        ],
+        "inputSchema": {},
+        "outputId": "f7723dc8-445f-33ef-bc14-3fce8c0b2b68",
+        "outputSchema": {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "additionalProperties": false,
+            "definitions": {
+                "DocumentVal": {
+                    "additionalProperties": false,
+                    "format": "document",
+                    "properties": {
+                        "displayName": {
+                            "type": "string"
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "enum": [...],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "LanguageVal": {
+                    "additionalProperties": false,
+                    "format": "language",
+                    "properties": {
+                        "displayName": {
+                            "type": "string"
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "enum": [...],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "properties": {
+                "document": {
+                    "$ref": "#/definitions/DocumentVal",
+                    "description": "The generated document",
+                    "title": "Generated document"
+                },
+                "documentName": {
+                    "description": "The name of the document",
+                    "title": "Document name",
+                    "type": "string"
+                },
+                "language": {
+                    "$ref": "#/definitions/LanguageVal",
+                    "description": "The language that is actually used",
+                    "title": "Language"
+                },
+                "messages": {
+                    "description": "Messages",
+                    "title": "Messages",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "document"
+            ],
+            "title": "Generate Document Output",
+            "type": "object"
+        },
+        "primaryParameters": [
+            "template"
+        ],
+        "type": "gendoc"
+    }
+```
