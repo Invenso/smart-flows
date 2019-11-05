@@ -1,7 +1,31 @@
 # Flow steps - in depth structure
 
-Flow steps are essential to all flows. They tell how flow blocks should look and what they do. The structure will be explained by analyzing the "Generate document"-step.
+Flow steps are essential to all flows. They tell how flow blocks should look and what data it needs. The structure will be explained by analyzing the "Generate document"-step.
 
+Like most entities, the step definition has a displayName, id & description. 
+iconClass is used to display the icon in the flowbuilder. 
+The group and type are labels to categorize the step definitions.
+externalOutputParameters can be set as outputParameters in a flow block.
+The primaryParameters is no longer used.
+
+InputForm & inputSchema are used to fill the parameters property of a flow block.
+
+The inputSchema defines how the data should be structured (defines the type of the property).
+
+The inputForm defines how the properties are rendered by the flow builder. It contains 
+- title
+- description
+- htmlClass, bodyClass, childClass
+- select, text, password, number,...: which type of (input)fields should be used
+- singleValue: whether links should be a singleValue or if multiple links are allowed (e.g. mapping data should only have one mapping while a documentName may have multiple).
+- placeholder
+- kes: which value of the model is referenced by this inputfield
+- complexOnly: linked field only
+- readonly
+- async: If a dropdown needs asynchronous data
+- asyncFilter: If a dropdown needs asynchronous filtering
+- allowUserEdit: property is allowed to be set to userEditable
+- ...
 
 #### Flow step defintion of the "Generate document"-step
 
@@ -18,7 +42,11 @@ Flow steps are essential to all flows. They tell how flow blocks should look and
         ],
         "group": "Document",
         "iconClass": "document",
-        "id": "e8848859-f919-3fa0-b23f-82a04d51447a",
+        "id": "e8848859-f919-3fa0-b23f-82a04d51447a",,
+        "primaryParameters": [
+            "template"
+        ],
+        "type": "gendoc"
         "inputForm": [
             {
                 "htmlClass": "m-x",
@@ -129,7 +157,7 @@ Flow steps are essential to all flows. They tell how flow blocks should look and
                 "type": "section"
             }
         ],
-        "inputSchema": {},
+        "inputSchema": {...},
         "outputId": "f7723dc8-445f-33ef-bc14-3fce8c0b2b68",
         "outputSchema": {
             "$schema": "http://json-schema.org/draft-04/schema#",
@@ -197,10 +225,6 @@ Flow steps are essential to all flows. They tell how flow blocks should look and
             ],
             "title": "Generate Document Output",
             "type": "object"
-        },
-        "primaryParameters": [
-            "template"
-        ],
-        "type": "gendoc"
+        }
     }
 ```
