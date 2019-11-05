@@ -13,6 +13,8 @@ externalOutputParameters can be set as outputParameters in a flow block.
 
 primaryParameters is no longer used.
 
+Output schema is used to render the output for a flow block.
+
 
 #### Input
 InputForm & inputSchema are used to fill the parameters property of a flow block.
