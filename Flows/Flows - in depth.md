@@ -29,10 +29,11 @@ Id will be filled on creation & displayName is recommended to be the displayName
 It's possible to add tags to flows (templates & data sets). If configured this way (Control panel, Settings, Tag defaults), some tags will be added on creation.
 
 #### Outputs
-Multiple outputs datas can be added & later retrieved by name (or all at once). These are all based on data sets. You can use plugin defined output data sets or any other type of data set. Fields mapped in this, should have fieldPaths corresponding with fields in the data set. The example at the bottom of this page contains one output with one output mapping defined by a custom data set (type: user).
+Multiple outputs datas can be added & later retrieved by name (or all at once). These are all based on data sets. You can use plugin defined output data sets or any other standard type of data set. Plugin data sets can be retrieve with a GET to "/api/v1/datasets/plugin/output" Fields mapped in this, should have fieldPaths corresponding with fields in the data set. The example at the bottom of this page contains one output with one output mapping defined by a custom data set (type: user).
+
+Once a flow has been finished, the output can be retrieve with GET "/api/v1/flows/executions/{executionId}/status". If no output is specified, all outputs will be returned. The name of the output can be used as a query parameter (in the example: 'output=Output 1').
 
 #### Settings
-
 groupToSingleDocument - Sometimes, you want to merge multiple documents into a single one. This can only be done for the documents created by the primary "Generate document"-step. When set to true and multiple records (Dynamics or Sugar) are used for input, all documents will be generated and merged (preprocessing & generateDocument zones are executed). Thereafter, the postprocessing steps will be executed for the one documents.  
 
 askQuestionsFirst - Upon starting a flow for multiple records, or for a flow which can be paused (e-signing) it can be handy to first ask all user input first. This is not always possible. Asking questions based on conditions can have unexpected results. 
@@ -44,25 +45,30 @@ A flow always contains at least one "Generate document"-step The template used f
 The primary template can have multiple data sets linked to it. In order to know from which entity the flow can be started, it can be necessary to include the primary entity on creation
 
 #### Body
+postProcessingSteps - Upon creation, this parameter can be filled by adding postProcessing flow step definitions to it. The id and displayName are enough. Once created, this parameter is ignored.
 
-postProcessingSteps
+Note: A flow zone is a logical way of splitting the flow in parts. One zone can contain multiple flow steps. Athough, in standard flows, this is restricted to one.
+
+preZones - This list of zones can be used to collect data or create conditions. In advanced flows, there is no limit to the type of steps you can add to these zones. 
+genDocZone - This zone contains the primary "Generate document"-step, by default, its required parameters are filled (data is linked). Only in simple flows other steps can be added to this.
+postZones - This list of zones is used to do the post processing step like storing the document in other systems, sending e-mails,... In advanced flows, there are no restrictions. More data can be collected and more documents can be generated.
+
+blocks: A zone contains 0+ blocks, an id and an optional displayName. The id will be generated for you on updating the flow or you can create it yourself.
+
+block:
+    step: A block is always based on a step definition or a condition. This is filled if it is based on a step definition
+        stepId: The id of the flow step defintion
+        userSelectable: Whether the user can choose to execute this step (while runnning)
+        userSelectableDefault: The default value for this
+        parameters: Depending on the step definition, different parameters will be settable.
+    try, switch, condition: The are the control blocks and can have lists of zones of their own
+    outputParameters: These are the parameters you want to retrieve when your execution has ended. They can be found in the step  definition
+   
+##### parameters further explained following the example
+The "Generate document"-step has the following parameters: data, dateFormat, documentName, format, language, template and timeFormat.
+Let's take a look at the documentName parameter:
 
 
-Simple <-> Advanced
-
-inputBlock
-preZones
-genDocZone
-postZones
-
-
-
-
-Flow steps
-
-Flow blocks
-
-Flow zones
 
 
 #### Example
