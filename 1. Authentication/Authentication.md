@@ -3,6 +3,7 @@
 To start using the api, you need to be authenticated. There are 2 ways to get authenticated:
 1. Use API keys
 2. Use JWT token
+3. Use authentication cookies
 
 ### API keys
 Use the Project console to generate an API key:
@@ -34,19 +35,37 @@ has parameters which reference the user who has created or modified the item. It
 <tr><td>resetPasswordSupported</td><td> Whether reset password is supported</td></tr>
 </table>
 
-##### POST /api/v1/authenticate
+##### POST /api/v1/authenticate/login
 
 Send a body with username, password & loginContext. LoginContext can be derived from GET /api/v1/authenticate.
 Returns a token which can be used in future requests by the header: "Authorization: Bearer your-jwt-token". This 
 token will expire after a while (configured per server). If this happens, you can ask another token.
 
-##### POST /api/v1/oauth2
+##### POST /api/v1/authenticate/oauth2
 
 First, create an url based on the oauth2 method returned by GET /api/v1/authenticate. This should be a GET 
 formed by oauth2.url with oauth2.parameters as query parameters. Go to it and log in with the Oauth provider. 
 The return url query parameter should be your own, which can handle the response query parameters. Send the 
 responseParams to this endpoint to receive a JWT token.
 
+---
+### Authentication cookies
+Why should you should use authentication cookies in your application? API keys are so easy to use.
+
+This has thesame pros and cons as JWT tokens using the authentication header but with the advantage they can be refreshed. This means, as long as the user doesn't logout or changes his password, the authentication cookie will stay valid (if refreshed on time).
+
+The cookie for your session is based on the X-Smart-Flows-Origin header. Avoid using 'project' & 'client' as origin, since these are used by the Smart Flows applications.
+
+#### How to use?
+##### POST /api/v1/authenticate/cookie/login/native
+##### POST /api/v1/authenticate/cookie/login/oauth
+Both these endpoints accept the same data as '/api/v1/authenticate/login' & '/api/v1/authenticate/oauth2' only they don't return anything but status 200. They set an httpOnly cookie.
+
+##### POST /api/v1/oauth2/cookie/refresh
+Before the token expires, make sure you trigger this. This also just returns status 200. It update the cookie. The cookie expires in 2 weeks
+
+##### POST /api/v1/oauth2/cookie/logout
+A new logout date is set on the user in the database. Since this one is used to calculate the cookie, it will be rendered invalid. The cookie is also cleared. 
 
 ---
 ### Extras in the authentication API
