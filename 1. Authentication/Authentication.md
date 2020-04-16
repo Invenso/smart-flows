@@ -56,13 +56,15 @@ This has thesame pros and cons as JWT tokens using the authentication header but
 
 The cookie for your session is based on the X-Smart-Flows-Origin header. Avoid using 'project' & 'client' as origin, since these are used by the Smart Flows applications.
 
+The cookie contains a zipped base64 encoded JWT token.
+
 #### How to use?
 ##### POST /api/v1/authenticate/cookie/login/native
 ##### POST /api/v1/authenticate/cookie/login/oauth
 Both these endpoints accept the same data as '/api/v1/authenticate/login' & '/api/v1/authenticate/oauth2' only they don't return anything but status 200. They set an httpOnly cookie.
 
 ##### POST /api/v1/oauth2/cookie/refresh
-Before the token expires, make sure you trigger this. This also just returns status 200. It update the cookie. The cookie expires in 2 weeks
+Before the token expires, make sure you trigger this. This also just returns status 200. It update the cookie. By default, the cookie expires in 2 weeks (jwt.expiration in application.properties)
 
 ##### POST /api/v1/oauth2/cookie/logout
 A new logout date is set on the user in the database. Since this one is used to calculate the cookie, it will be rendered invalid. The cookie is also cleared. 
